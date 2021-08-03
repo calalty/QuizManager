@@ -26,20 +26,6 @@ mongoose.connect(config.url, {
     useFindAndModify: false
 })
 
-async function mongoDB() {
-    const client = new MongoClient(config.url);
-
-    try {
-        await client.connect
-    } catch (e) {
-        console.log(e)
-    } finally {
-        await client.close()
-    }
-}
-
-mongoDB()
-
 app.listen(process.env.PORT || 4321); 
 console.log("Listening on PORT 4321")
 

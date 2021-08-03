@@ -24,13 +24,13 @@ const viewer = new User({email: 'viewer@webbiskools.com', password: hashPassword
 const editor = new User({email: 'editor@webbiskools.com', password: hashPassword, role: 'editor'})
 
 
-// restricted.save()  
-// viewer.save()
-// editor.save()
+restricted.save()  
+viewer.save()
+editor.save()
 
 }
 
-preConfig()
+// preConfig()
 
 // check if user is in database
 
