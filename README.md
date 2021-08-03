@@ -8,7 +8,9 @@ Watch this video to help set up your Mongo server and database:
 
 ## 2) Backend Server 
 
-Open up another terminal within `VSCODE`.Run `cd server` 
+Open up another terminal within `VSCODE`.
+
+Run `cd server` 
 
 Run `nodemon server.js` for a the backend server.
 
