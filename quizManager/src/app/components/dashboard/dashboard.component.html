@@ -1,0 +1,102 @@
+<div class="dashboard">
+  <div class="dashboard__container">
+    <div class="dashboard__container__topics">
+      <header>
+        <h1 class="headers headers__topic">Topics</h1>
+      </header>
+      <form #form="ngForm" *ngIf="editor && clickedUpdate === false" class="newtpc__form" (submit)="createTopic()">
+        <input
+          class="newtpc__form__input"
+          [(ngModel)]="newTopic.topic"
+          name="topic"
+          type="text"
+          placeholder="topic"
+          required
+        />
+        <button [disabled]="form.invalid" class="newtpc__form__btn" type="submit">Create +</button>
+      </form>
+      <form #form="ngForm" *ngIf="editor && clickedUpdate === true" class="newtpc__form" (submit)="updateTopic()">
+        <input
+          class="newtpc__form__input"
+          [(ngModel)]="updatedTopic.topic"
+          name="topic"
+          type="text"
+          placeholder="topic"
+          required
+        />
+        <button class="newtpc__form__btn" [disabled]="form.invalid" type="submit">Update</button>
+      </form>
+      <section
+        class="topics"
+        *ngFor="let all of allTopics; let i = index"
+        routerLinkActive="is-active"
+      >
+        <ul class="topics__list">
+          <li>
+            <span [routerLink]="['/dashboard', all._id]">
+              <p class="topics__list__item">
+                <a *ngIf="editor" (click)="deleteTopic(all._id)"
+                  ><i class="fas fa-solid fa-trash"></i
+                ></a>
+                <a *ngIf="editor  && clickedUpdate === false" (click)="clickedUpdate = true"
+                  ><i class="fas fa-solid fa-paint-brush"></i
+                ></a>
+                <a *ngIf="clickedUpdate === true" (click)="clickedUpdate = false"><i class="fas fa-plus"></i></a>
+                {{ all.topic }}
+              </p>
+            </span>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="dashboard__container__quizzes">
+      <header>
+        <h1 class="headers headers__questions">Questions</h1>
+      </header>
+      <button *ngIf="editor" class="btn--new" routerLink="./createquiz">
+        Create +
+      </button>
+      <section class="questions" *ngFor="let all of allQuizzes; let i = index">
+        <ul class="questions__list">
+          <li>
+            <p>
+              <a *ngIf="editor" (click)="deleteQuiz(all._id)"
+                ><i class="fas fa-solid fa-trash"></i></a
+              ><a
+                *ngIf="editor"
+                [routerLink]="['/dashboard', all._id, 'patchquiz']"
+                ><i class="fas fa-solid fa-paint-brush"></i></a
+              >{{ all.description }}
+              <button
+                *ngIf="editor || viewer"
+                type="button"
+                (click)="showAnswers(i)"
+                [class.arrow-up]="show[i]"
+                [class.arrow-down]="!show[i]"
+              ></button>
+            </p>
+          </li>
+        </ul>
+        <div *ngIf="show[i]">
+          <section
+            *ngFor="let all of all.answers; let i = index"
+            class="dropdown-content"
+          >
+            <ul
+              class="questions__list"
+              [ngClass]="{
+                correct: all.correct === true,
+                incorrect: all.correct === false
+              }"
+            >
+              <li>
+                <p>{{ str.charAt(i) }}) {{ all.option }}</p>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

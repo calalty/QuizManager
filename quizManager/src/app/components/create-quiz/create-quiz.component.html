@@ -1,0 +1,51 @@
+<div class="create">
+  <div class="create__container">
+    <h1 class="header__create">Create</h1>
+    <form #form="ngForm" (ngSubmit)="createQuiz()">
+      <input
+        class="input input__description"
+        [(ngModel)]="newQuiz.description"
+        type="text"
+        name="description"
+        placeholder="description"
+        required
+      />
+      <div *ngFor="let answers of newQuiz.answers; let i = index">
+        <input
+          type="radio"
+          class="input input__radio"
+          name="correct"
+          value="{{ answers.correct }}"
+          (change)="onChange((answers.correct = true))"
+          [checked]="answers.correct"
+          [disabled]="isDisabled"
+          required
+        />
+        <input
+          class="input input__option"
+          [(ngModel)]="answers.option"
+          [ngClass]="{
+            correct: answers.correct === true,
+            incorrect: answers.correct === false
+          }"
+          type="text"
+          name="option"
+          placeholder="option"
+          required
+        />
+        <a (click)="deleteOption(i)"><i class="fas fa-solid fa-trash"></i></a>
+      </div>
+      <button class="btn" type="button" (click)="addOption()">Add</button>
+      <button
+        class="btn"
+        type="submit"
+        [disabled]="form.invalid || isDisabled === false"
+        id="submit-btn"
+      >
+        Submit
+      </button>
+      <button class="btn" type="button" (click)="reset($event)">Reset</button>
+      <p class="user-msg">{{ msg }}</p>
+    </form>
+  </div>
+</div>

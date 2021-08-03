@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Staatliches&display=swap');
+html, body {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+a {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+h1 {
+    font-family: 'Staatliches', cursive;
+}

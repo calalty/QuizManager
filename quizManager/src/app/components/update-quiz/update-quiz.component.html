@@ -1,0 +1,54 @@
+<div class="update">
+  <div class="update__container">
+    <h1 class="header__update">Update</h1>
+    <form #form="ngForm" (ngSubmit)="updateQuiz()">
+      <div *ngFor="let q of oldQuiz">
+        <input
+          class="input input__description"
+          [(ngModel)]="q.description"
+          type="text"
+          name="description"
+          required
+        />
+      </div>
+
+      <div *ngFor="let questions of oldQuiz">
+        <div *ngFor="let answers of questions.answers; let i = index">
+          <input
+            class="input input__radio"
+            type="radio"
+            name="correct"
+            value="{{ answers.correct }}"
+            (change)="onChange((answers.correct = true))"
+            [checked]="answers.correct"
+            [disabled]="isDisabled"
+          />
+          <input
+            class="input input__option"
+            [(ngModel)]="answers.option"
+            [ngClass]="{
+              correct: answers.correct === true,
+              incorrect: answers.correct === false
+            }"
+            type="text"
+            name="option{{ i }}"
+            placeholder="option"
+            required
+          />
+          <a (click)="deleteOption(i)"><i class="fas fa-solid fa-trash"></i></a>
+        </div>
+      </div>
+      <button class="btn" type="button" (click)="addOption()">Add</button>
+      <button
+        class="btn"
+        type="submit"
+        id="submit-btn"
+        [disabled]="form.invalid || isDisabled === false"
+      >
+        Submit
+      </button>
+      <button class="btn" type="button" (click)="reset($event)">Reset</button>
+      <p class="user-msg">{{ msg }}</p>
+    </form>
+  </div>
+</div>
