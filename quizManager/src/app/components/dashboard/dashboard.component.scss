@@ -15,7 +15,7 @@
     margin-bottom: 5em;
 
 
-    &__topics {
+    &__title {
       display: flex;
       flex-direction: column;
       padding: 2.5rem;
@@ -50,7 +50,7 @@
   letter-spacing: 0.5rem;
   color: #fff;
 
-  &__topic {
+  &__title {
     text-shadow: 2px 5px #264653
   }
 
@@ -124,7 +124,7 @@
 
 }
 
-.topics {
+.title {
   padding: 0rem 1rem;
   border: 0.25rem solid #264653;
   border-radius: 0.5rem;

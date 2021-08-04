@@ -1,35 +1,35 @@
 const router = require("express").Router();
 const { userAuth, checkRole } = require("../middlewares/auth");
-const Topic = require("../models/topic");
+const Title = require("../models/title");
 const Quiz = require("../models/quiz");
-router.post("/api/createtopic", userAuth, checkRole("editor"), (req, res) => {
-  let newTopic = new Topic({
-    topic: req.body.topic,
+router.post("/api/createtitle", userAuth, checkRole("editor"), (req, res) => {
+  let newTitle = new Title({
+    title: req.body.title,
   });
-  newTopic.save();
-  res.send(newTopic);
+  newTitle.save();
+  res.send(newTitle);
 });
 
-router.get("/api/findtopics", userAuth, (req, res) => {
-  Topic.find({}).then((topic) => {
-    res.send(topic);
+router.get("/api/findtitles", userAuth, (req, res) => {
+  Title.find({}).then((title) => {
+    res.send(title);
   });
 });
 
-router.get("/api/findtopic/:id", userAuth, (req, res) => {
-  Topic.findOne({
+router.get("/api/findtitle/:id", userAuth, (req, res) => {
+  Title.findOne({
     _id: req.params.id,
-  }).then((topic) => {
-    res.send(topic);
+  }).then((title) => {
+    res.send(title);
   });
 });
 
 router.patch(
-  "/api/patchtopic/:id",
+  "/api/patchtitle/:id",
   userAuth,
   checkRole("editor"),
   (req, res) => {
-    Topic.findOneAndUpdate(
+    Title.findOneAndUpdate(
       {
         _id: req.params.id,
         _userId: req.user_id,
@@ -37,24 +37,24 @@ router.patch(
       {
         $set: req.body,
       }
-    ).then((updatedTopic) => {
-      if (updatedTopic) {
-        res.send(updatedTopic);
+    ).then((updatedTitle) => {
+      if (updatedTitle) {
+        res.send(updatedTitle);
       }
     });
   }
 );
 
 router.delete(
-  "/api/deletetopic/:id",
+  "/api/deletetitle/:id",
   userAuth,
   checkRole("editor"),
   (req, res) => {
-    Topic.findOneAndDelete({
+    Title.findOneAndDelete({
       _id: req.params.id,
       _userId: req.user_id,
-    }).then((deletedTopic) => {
-      if (deletedTopic) {
+    }).then((deletedTitle) => {
+      if (deletedTitle) {
         Quiz.deleteMany({
           _titleId: req.params.id,
         }).then((deletedQuizzes) => {

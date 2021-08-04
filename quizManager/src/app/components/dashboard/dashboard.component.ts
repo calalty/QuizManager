@@ -2,8 +2,8 @@ import { AuthService } from './../../services/auth.service';
 import { User } from './../../models/User';
 import { Quiz } from './../../models/Quiz';
 import { QuizService } from './../../services/quiz.service';
-import { TopicService } from './../../services/topic.service';
-import { Topic } from './../../models/Topic';
+import { TitleService } from './../../services/title.service';
+import { Title } from './../../models/Title';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -15,12 +15,12 @@ import { ActivatedRoute } from '@angular/router';
 export class DashboardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private topicService: TopicService,
+    private titleService: TitleService,
     private quizService: QuizService,
     private authService: AuthService
   ) {}
 
-  allTopics!: Topic[];
+  allTitles!: Title[];
   allQuizzes!: Quiz[];
   result: any = {};
   titleId!: string;
@@ -31,20 +31,20 @@ export class DashboardComponent implements OnInit {
   selected: any = false;
   clickedUpdate: any = false;
 
-  newTopic: Topic = {
+  newTitle: Title = {
     _id: '',
-    topic: '',
+    title: '',
   };
 
-  updatedTopic: Topic = {
+  updatedTitle: Title = {
     _id: '',
-    topic: '',
+    title: '',
   };
 
   ngOnInit(): void {
-    this.topicService.getTopics().subscribe((allTopics) => {
-      this.allTopics = allTopics;
-      console.log(this.allTopics);
+    this.titleService.getTitles().subscribe((allTitles: any[]) => {
+      this.allTitles = allTitles;
+      console.log(this.allTitles);
     });
     this.route.params.subscribe((params) => {
       if (params.id) {
@@ -68,22 +68,22 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  createTopic() {
-    this.topicService.createTopic(this.newTopic.topic).subscribe((res) => {
+  createTitle() {
+    this.titleService.createTitle(this.newTitle.title).subscribe((res: any) => {
       console.log(res);
       location.reload();
     });
   }
 
-  deleteTopic(id: string) {
-    this.topicService.deleteTopic(id).subscribe((res) => {
+  deleteTitle(id: string) {
+    this.titleService.deleteTitle(id).subscribe((res: any) => {
       console.log(res);
       location.reload();
-    });
+    }); 
   }
 
-  updateTopic() {
-    this.topicService.updateTopic(this.titleId, this.updatedTopic.topic ).subscribe((res) => {
+  updateTitle() {
+    this.titleService.updateTitle(this.titleId, this.updatedTitle.title ).subscribe((res: any) => {
       console.log(res);
       location.reload();
     })

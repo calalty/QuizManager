@@ -1,48 +1,48 @@
 <div class="dashboard">
   <div class="dashboard__container">
-    <div class="dashboard__container__topics">
+    <div class="dashboard__container__title">
       <header>
-        <h1 class="headers headers__topic">Topics</h1>
+        <h1 class="headers headers__title">Titles</h1>
       </header>
-      <form #form="ngForm" *ngIf="editor && clickedUpdate === false" class="newtpc__form" (submit)="createTopic()">
+      <form #form="ngForm" *ngIf="editor && clickedUpdate === false" class="newtpc__form" (submit)="createTitle()">
         <input
           class="newtpc__form__input"
-          [(ngModel)]="newTopic.topic"
-          name="topic"
+          [(ngModel)]="newTitle.title"
+          name="title"
           type="text"
-          placeholder="Topic"
+          placeholder="Title"
           required
         />
         <button [disabled]="form.invalid" class="newtpc__form__btn" type="submit">Create +</button>
       </form>
-      <form #form="ngForm" *ngIf="editor && clickedUpdate === true" class="newtpc__form" (submit)="updateTopic()">
+      <form #form="ngForm" *ngIf="editor && clickedUpdate === true" class="newtpc__form" (submit)="updateTitle()">
         <input
           class="newtpc__form__input"
-          [(ngModel)]="updatedTopic.topic"
-          name="topic"
+          [(ngModel)]="updatedTitle.title"
+          name="title"
           type="text"
-          placeholder="Topic"
+          placeholder="Title"
           required
         />
         <button class="newtpc__form__btn" [disabled]="form.invalid" type="submit">Update</button>
       </form>
       <section
-        class="topics"
-        *ngFor="let all of allTopics; let i = index"
+        class="title"
+        *ngFor="let all of allTitles; let i = index"
         routerLinkActive="is-active" 
       >
-        <ul class="topics__list">
+        <ul class="title__list">
           <li>
             <span [routerLink]="['/dashboard', all._id]">
-              <p class="topics__list__item">
-                <a *ngIf="editor" (click)="deleteTopic(all._id)"
+              <p class="title__list__item">
+                <a *ngIf="editor" (click)="deleteTitle(all._id)"
                   ><i class="fas fa-solid fa-trash"></i
                 ></a>
                 <a *ngIf="editor  && clickedUpdate === false" (click)="clickedUpdate = true"
                   ><i class="fas fa-solid fa-paint-brush"></i
                 ></a>
                 <a *ngIf="clickedUpdate === true" (click)="clickedUpdate = false"><i class="fas fa-plus"></i></a>
-                {{ all.topic }}
+                {{ all.title}}
               </p>
             </span>
           </li>

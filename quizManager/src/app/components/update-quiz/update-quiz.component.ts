@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import {
   FormControl,
 } from '@angular/forms';
@@ -16,6 +17,7 @@ export class UpdateQuizComponent implements OnInit {
     private route: ActivatedRoute,
     private quizService: QuizService,
     private router: Router,
+    private authService: AuthService
   ) {}
 
   quizId!: string;
@@ -32,6 +34,13 @@ export class UpdateQuizComponent implements OnInit {
     this.getQuiz();
     this.msg = 'Update your Quiz!';
     this.isDisabled = true;
+    if (this.authService.loggedInUser()) {
+      this.authService.loggedInUser().subscribe((user: any) => {
+        if (user.role !== 'editor') {
+          this.router.navigate(['dashboard']);
+        }
+      });
+    }
   }
 
   getQuiz() {

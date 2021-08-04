@@ -17,7 +17,7 @@ require("./middlewares/passport")(passport);
 const config = require('./config/database')
 const userRoutes = require('./routes/users')
 const quizRoutes = require('./routes/quiz')
-const topicRoutes = require('./routes/topic')
+const titleRoutes = require('./routes/title')
 
 
 mongoose.connect(config.url, {
@@ -31,4 +31,4 @@ console.log("Listening on PORT 4321")
 
 app.use(userRoutes)
 app.use(quizRoutes)
-app.use(topicRoutes)
+app.use(titleRoutes)

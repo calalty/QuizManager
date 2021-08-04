@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Quiz } from './../../models/Quiz';
 import { QuizService } from './../../services/quiz.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,8 @@ export class CreateQuizComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private quizService: QuizService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   titleId!: string;
@@ -27,7 +29,15 @@ export class CreateQuizComponent implements OnInit {
       this.titleId = params.id;
     });
     this.msg = 'Create your Quiz!';
+    if (this.authService.loggedInUser()) {
+      this.authService.loggedInUser().subscribe((user: any) => {
+        if (user.role !== 'editor') {
+          this.router.navigate(['dashboard']);
+        }
+      });
+    }
   }
+  
 
   newQuiz: Quiz = {
     questionId: 0,
