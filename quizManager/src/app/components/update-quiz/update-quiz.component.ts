@@ -1,15 +1,10 @@
 import {
-  NgForm,
   FormControl,
-  Validators,
-  FormBuilder,
-  FormGroup,
 } from '@angular/forms';
 import { Quiz } from './../../models/Quiz';
 import { QuizService } from './../../services/quiz.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { queueScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-update-quiz',

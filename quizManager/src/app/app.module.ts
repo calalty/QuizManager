@@ -29,7 +29,7 @@ import { LogoutComponent } from './components/logout/logout.component';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true
-  }],
+  }, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {

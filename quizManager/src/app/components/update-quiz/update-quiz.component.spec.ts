@@ -1,3 +1,6 @@
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateQuizComponent } from './update-quiz.component';
@@ -8,6 +11,7 @@ describe('UpdateQuizComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
       declarations: [ UpdateQuizComponent ]
     })
     .compileComponents();
