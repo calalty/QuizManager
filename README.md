@@ -32,11 +32,16 @@ Watch this video if you struggle to help set up your Mongo server and database:
 
 `https://www.youtube.com/watch?v=FwMwO8pXfq0`
 
+There is also a video of me doing it called `MongoDBTutorial` that should be with you.
+
 ## 5) MongoDB Compass 
 
 Download at => `https://www.mongodb.com/try/download/compass`.
 
 Open up and click `fill in connection fields individually`, then add `Hostname: 127.0.0.1`, `Port: 27017` and click `Connect`. 
+
+There is also a video of me doing it called `CompassTutorial` that should be with you.
+
 
 ## 6) Add Users to DB
 
@@ -45,6 +50,8 @@ Go to the server file in the Quiz Manager Project.
 And then go to this route: `/QuizManagerProject/server/middlewares/auth.js`
 
 Uncomment `// preConfig()` on line 33 and then comment it back again so it only runs once. 
+
+There is also a video of me doing it called `AddUsers` that should be with you.
 
 
 
